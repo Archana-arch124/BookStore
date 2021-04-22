@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     border: "1px lightgray solid",
     width: "16%",
     height: "30px",
-    padding:"0px 17px 0px"
+    padding: "0px 17px 0px"
   },
   countButton: {
     height: "5px",
@@ -79,7 +79,7 @@ export default function Cart(props) {
   const [stateFlag, setStateFlag] = React.useState(false);
   const [stateError, setStateError] = React.useState("");
   let history = useHistory();
- 
+
   const makeInitial = () => {
     setNameFlag(false);
     setNameError("");
@@ -93,16 +93,16 @@ export default function Cart(props) {
     setStateError("");
   };
 
-  const removeItem = (e,data) => {
+  const removeItem = (e, data) => {
     e.stopPropagation();
     services.deleteCartItem(data._id)
-    .then((data)=> {
-      console.log("Successfully deleted"+data);
-      props.allCartItem();
-    })
-    .catch((err) => {
-      console.log("Error while removing"+err)
-    })
+      .then((data) => {
+        console.log("Successfully deleted" + data);
+        props.allCartItem();
+      })
+      .catch((err) => {
+        console.log("Error while removing" + err)
+      })
   }
 
   const patternCheck = () => {
@@ -140,7 +140,7 @@ export default function Cart(props) {
       setStateError("Invalid state");
       isError = true;
     }
-    console.log( "name " +name + "   mobile " + mobile + "   address " + address +"   state " + state +  "   city " + city);
+    console.log("name " + name + "   mobile " + mobile + "   address " + address + "   state " + state + "   city " + city);
     return isError;
   };
 
@@ -180,7 +180,7 @@ export default function Cart(props) {
                   value={data.product_id.quantity}
                 />
                 <IconButton className={classes.countButton}>+</IconButton>
-                <Button onClick={(e) => {removeItem(e,data)} }>Remove</Button>
+                <Button onClick={(e) => { removeItem(e, data) }}>Remove</Button>
               </div>
             </div>
           </div>
@@ -228,13 +228,13 @@ export default function Cart(props) {
     };
     console.log(orderData);
     services.addOrder(orderData).then((data) => {
-        console.log("Successfully order Placed" + JSON.stringify(data));
-        history.push("/dashboard/orderPlaced");
-      })
+      console.log("Successfully order Placed" + JSON.stringify(data));
+      history.push("/dashboard/orderPlaced");
+    })
       .catch((err) => {
         console.log("Error occured while placing order" + err);
       });
-      props.cartBooks.map((book) => removeItem(e,book));
+    props.cartBooks.map((book) => removeItem(e, book));
   };
   return (
     <div className="cartBody">

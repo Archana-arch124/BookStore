@@ -54,7 +54,6 @@ export default function OrderPlaced(props) {
         color="primary"
        /* onClick={history.push("/dashboard")}*/
       >
-  
         CONTINUE SHOPPING
       </Button>
     </div>

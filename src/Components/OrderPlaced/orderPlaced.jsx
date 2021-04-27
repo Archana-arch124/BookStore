@@ -21,6 +21,9 @@ export default function OrderPlaced(props) {
   const random = Math.floor((Math.random() * 1000000 ) + 1);
   let history = useHistory();
 
+  function handleClick() {
+    history.push("/dashboard");
+  }
   return (
     <div className="placedBody">
       <img className="successfulImage" src={placed} alt="" />
@@ -52,7 +55,7 @@ export default function OrderPlaced(props) {
         className={classes.shopingButton}
         variant="contained"
         color="primary"
-       /* onClick={history.push("/dashboard")}*/
+        onClick={handleClick}
       >
         CONTINUE SHOPPING
       </Button>

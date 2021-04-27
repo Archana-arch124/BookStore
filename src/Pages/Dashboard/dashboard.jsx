@@ -13,7 +13,8 @@ const services = new Services();
 const useStyles = makeStyles((theme) => ({
     dashboardMain: {
         width: "100%",
-        display: "flex",
+        display: "flex",  
+        marginTop: "25px",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",

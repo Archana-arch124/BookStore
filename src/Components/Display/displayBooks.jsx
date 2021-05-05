@@ -72,7 +72,6 @@ function DisplayNotes(props) {
   useEffect(() => {
     console.log(props)
     props.getBooks();
-
   }, [])
 
   /*  React.useEffect(() => {
@@ -88,7 +87,6 @@ function DisplayNotes(props) {
         console.log(err);
       });
   }; */
-
   const handleChange = (event) => {
     const name = event.target.name;
     setSort({

@@ -8,6 +8,7 @@ import { Route, Switch } from 'react-router-dom';
 import ProtectedRoutes  from "../../Services/protectedRoutes.js";
 import Services from "../../Services/bookServices"; 
 import PlacedOrder from "../../Components/OrderPlaced/orderPlaced";
+import { getallBooks } from "../../Redux/Actions/action";
 const services = new Services();
 
 const useStyles = makeStyles((theme) => ({
@@ -28,6 +29,7 @@ export default function Dashboard(props) {
     const [setShow] = React.useState(false);
     const [cartBooks, setCartBooks] = React.useState([]);
     const [orderPlaced] = React.useState([]);
+
    React.useEffect(() => {
         allCartItem();
       }, []);
@@ -49,7 +51,7 @@ export default function Dashboard(props) {
                 allCartItem={allCartItem}/>
             <Switch>
                 <Route path="/dashboard" exact>
-                    <Books cartBooks={cartBooks} allCartItem={allCartItem} />
+                    <Books cartBooks={cartBooks} allCartItem={allCartItem}  />
                 </Route>
                 <ProtectedRoutes path="/dashboard/cart" exact>
                     <Cart cartBooks={cartBooks} allCartItem={allCartItem} />

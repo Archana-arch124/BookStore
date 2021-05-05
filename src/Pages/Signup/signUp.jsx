@@ -71,6 +71,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "20px",
     background: "#A03037",
     width: "90%",
+    color: "white",
   },
 }));
 

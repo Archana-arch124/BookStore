@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
 export default function OrderPlaced(props) {
   const classes = useStyles();
   const random = Math.floor((Math.random() * 1000000 ) + 1);
+  
   let history = useHistory();
 
   function handleClick() {

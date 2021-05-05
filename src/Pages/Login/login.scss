@@ -39,7 +39,7 @@
     background-color: white;
     display: flex;
     padding: 30px;
-    height: 341px;
+    height: 352px;
     align-items: center;
     flex-direction: column;
     justify-content: center;
@@ -66,6 +66,9 @@
     display: flex;
     margin-top: 48px;
 }
+.span{
+    margin-left: 160px;
+}
  @media only screen and (max-width: 600px) {
     .img {
      display:none;
@@ -74,11 +77,14 @@
         height:420px;
         background-color: white;
     }
-  } 
+    .span{
+        margin-left: 129px;
+    }
+  }
   @media only screen and (max-width: 1030px) {
     .main1{
     display: flex;
     align-items: center;
-    height: 59vh;
-  } 
+/*     height:  100vh;
+ */  } 
 }

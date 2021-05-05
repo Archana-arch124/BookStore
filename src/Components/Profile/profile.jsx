@@ -70,7 +70,7 @@ export default function Profile(props) {
                     open={Boolean(anchorE2)}
                     onClose={profileHandleClose}>
                     <div className="MenuList" >
-                        <b  style={{ fontSize: 20,paddingLeft:"15px",paddingRight:"25px" }}>Hello, </b>
+                        <b  style={{ fontSize: 20,paddingLeft:"15px",paddingRight:"25px" }}>Hello,Archanagowda </b>
                         <MenuItem  >
                         <div>My Profile</div>
                         </MenuItem>

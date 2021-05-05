@@ -1,7 +1,7 @@
 import React from "react";
 import Paginations from "@material-ui/lab/Pagination";
 import { makeStyles } from "@material-ui/core/styles";
-import './pagination.css'
+import './pagination.scss'
 
 const useStyles = makeStyles((theme) => ({
   paginateIcon: {

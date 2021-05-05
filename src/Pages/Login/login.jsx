@@ -192,7 +192,7 @@ export default function Login(props) {
                   variant="outlined"
                   type="password"
                 />
-                <span style={{ marginLeft: "160px" }}>Forgot Password?</span>
+                <div className="span" >Forgot Password?</div>
               </div>
               <Button
                 fullWidth
@@ -202,7 +202,7 @@ export default function Login(props) {
               >
                 Login
           </Button>
-              <b style={{ marginTop: "20px" }}>OR</b>
+              <b style={{ marginTop: "20px" }}>-------- OR --------</b>
               <div className="logs" ><Button
                 fullWidth
                 className={classes.facebook}

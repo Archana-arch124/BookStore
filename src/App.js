@@ -6,7 +6,6 @@ import Dashboard from './Pages/Dashboard/dashboard';
 import store from './Redux/store.js';
 import { Provider } from 'react-redux';
 
-
 function App() {
   return (
     <div className="App">

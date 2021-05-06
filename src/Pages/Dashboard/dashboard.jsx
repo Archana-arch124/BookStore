@@ -58,12 +58,11 @@ export default function Dashboard(props) {
                     setShow={setShow}
                     allCartItem={allCartItem} />
             </Profiler>
+            <Profiler id="Book" onRender={profilerCallBack}>
             <Switch>
-                <Profiler id="cartBook" onRender={profilerCallBack}>
                     <Route path="/dashboard" exact>
                         <Books cartBooks={cartBooks} allCartItem={allCartItem} />
                     </Route>
-                </Profiler>
                 <ProtectedRoutes path="/dashboard/cart" exact>
                     <Cart cartBooks={cartBooks} allCartItem={allCartItem} />
                 </ProtectedRoutes >
@@ -71,6 +70,7 @@ export default function Dashboard(props) {
                     <PlacedOrder orderPlaced={orderPlaced} />
                 </ProtectedRoutes >
             </Switch>
+            </Profiler>
             <Footer />
         </div>
     );

@@ -62,7 +62,6 @@ export default function Cart(props) {
   const [detailForm, setDetailForm] = React.useState(false);
   const [summaryField, setSummaryField] = React.useState(false);
   const [value, setValue] = React.useState("Home");
-
   const [name, setName] = React.useState();
   const [nameFlag, setNameFlag] = React.useState(false);
   const [nameError, setNameError] = React.useState("");
@@ -78,6 +77,8 @@ export default function Cart(props) {
   const [state, setState] = React.useState();
   const [stateFlag, setStateFlag] = React.useState(false);
   const [stateError, setStateError] = React.useState("");
+  const [count, setCount] = React.useState(1);
+
   let history = useHistory();
 
   const makeInitial = () => {
@@ -91,6 +92,7 @@ export default function Cart(props) {
     setCityError("");
     setStateFlag(false);
     setStateError("");
+
   };
 
   const removeItem = (e, data) => {
@@ -157,6 +159,37 @@ export default function Cart(props) {
     setValue(event.target.value);
   };
 
+  const AddCartQuantity = (data) => {
+
+    console.log("cart item ID", data._id)
+    console.log("quantity", count)
+
+    let quantityToBuy = {
+      "quantity": count
+    }
+    console.log("quantityToBuy",quantityToBuy)
+    services.updateCartBook(quantityToBuy, data._id).then((data) => {
+      props.allCartItem();
+    }).catch((err) => {
+      console.log("Error while adding the quantity" + err)
+    })
+  }
+
+
+  const handleIncrement = (data) => {
+    console.log('data in handleIncrement : ', data)
+    setCount(count =>count + 1);
+    AddCartQuantity(data)
+
+  };
+
+
+  const handleDecrement = (data) => {
+    console.log('data in handleDecrement: ', data)
+    setCount(count => count - 1);
+    AddCartQuantity(data)
+  };
+
   const CartBooks = () => {
     return (
       <div className="cartItem">
@@ -174,12 +207,13 @@ export default function Cart(props) {
                 Rs. {data.product_id.price}
               </Typography>
               <div className="countItem">
-                <IconButton className={classes.countButton}>-</IconButton>
-                <InputBase
-                  className={classes.countInput}
-                  value={data.product_id.quantity}
-                />
-                <IconButton className={classes.countButton}>+</IconButton>
+              <IconButton
+                  className={classes.countButton}
+                  onClick={(e) => { handleDecrement(data) }}>-</IconButton>
+                <h4>{count}</h4>
+                <IconButton
+                  className={classes.countButton}
+                  onClick={(e) => { handleIncrement(data) }}>+</IconButton>
                 <Button onClick={(e) => { removeItem(e, data) }}>Remove</Button>
               </div>
             </div>

@@ -17,7 +17,14 @@ function App() {
             <Redirect path="/" to="/Login" exact />
             <Route path="/SignUp" component={SignUp} exact />
             <Route path="/Login" component={Login} exact />
-            <Suspense fallback={<div>Loading books......</div>}>
+            <Suspense fallback={<div className="load">
+              <div className="loader">
+                <div />
+                <div />
+                <div />
+                <div />
+              </div>
+              </div>}>
               <Route path="/Dashboard" component={Dashboard} ></Route>
             </Suspense>
           </Switch>

@@ -115,6 +115,9 @@ export default function Appbar(props) {
   function handleClick() {
     history.push("/dashboard/cart");
   }
+  function clickBook() {
+    history.push("/dashboard");
+  }
   return (
     <React.Fragment>
       <CssBaseline />
@@ -123,7 +126,7 @@ export default function Appbar(props) {
           <div className={classes.leftOptions}>
             <div className={classes.title}>
               <img className={classes.titleLogo} src={logo} />
-              <Typography className={classes.titleName} variant="h6"  >
+              <Typography className={classes.titleName} variant="h6" onClick={clickBook} >
                 Bookstore
               </Typography>
             </div>

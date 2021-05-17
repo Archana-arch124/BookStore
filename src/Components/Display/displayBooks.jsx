@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { makeStyles } from "@material-ui/core/styles";
 import bookImg from "../../Assets/Image14.png";
 import Typography from "@material-ui/core/Typography";
@@ -8,7 +8,7 @@ import Select from "@material-ui/core/Select";
 import Pagination from "../Pagination/pagination.jsx";
 import "./displayBooks.scss";
 import * as action from '../../Redux/Actions/action.js'
-import { connect, useDispatch, useSelector } from 'react-redux'
+import { connect } from 'react-redux'
 
 import Services from "../../Services/bookServices";
 const services = new Services();
@@ -45,6 +45,22 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "2px",
     fontSize: "11px",
   },
+  addedwishButton: {
+    backgroundColor: "pink",
+    width: "170px",
+    margin: "5px",
+    color: "black",
+    borderRadius: "2px",
+    fontSize: "11px",
+  },
+  addedwishlist: {
+    backgroundColor: "#1976D2",
+    width: "80px",
+    margin: "5px",
+    color: "pink",
+    borderRadius: "2px",
+    fontSize: "11px",
+  },
   wishListButton: {
     padding: "3px 4px 3px 4px",
     margin: "5px",
@@ -52,6 +68,14 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "13px",
     borderRadius: "2px",
     fontWeight: "bold",
+  },
+  wishListedButton: {
+    backgroundColor: "pink",
+    width: "80px",
+    margin: "5px",
+    color: "black",
+    borderRadius: "2px",
+    fontSize: "11px",
   },
 
   optionSelect: {
@@ -66,27 +90,28 @@ function DisplayNotes(props) {
   const [sort, setSort] = React.useState({ type: "" });
   const [postsPerPage] = React.useState(8);
   const [currentPage, setCurrentPage] = React.useState(1);
+  
 
+  /*   useEffect(() => {
+      console.log(props)
+      props.getBooks();
+      
+    }, []) */
 
-
-  useEffect(() => {
-    console.log(props)
-    props.getBooks();
-  }, [])
-
-  /*  React.useEffect(() => {
+  React.useEffect(() => {
     getAllBooks();
   }, []);
- 
+
   const getAllBooks = () => {
     services.getBooks().then((data) => {
-        setBooks(data.data.result);
-        setData(data.data.result);
-      })
+      setBooks(data.data.result);
+      setData(data.data.result);
+    })
       .catch((err) => {
         console.log(err);
       });
-  }; */
+  };
+
   const handleChange = (event) => {
     const name = event.target.name;
     setSort({
@@ -99,18 +124,12 @@ function DisplayNotes(props) {
         setBooks(data);
         break;
       case "1":
+        setBooks(books.sort((a, b) => (a.price < b.price ? 1 : -1)));
         setBooks(data);
-        setBooks(books.sort((a, b) => (a.price > b.price ? -1 : 1)));
         break;
       case "2":
-        setBooks(data);
         setBooks(books.sort((a, b) => (a.price > b.price ? 1 : -1)));
-        break;
-      case "3":
         setBooks(data);
-        setBooks(books.reverse());
-        break;
-
     }
   };
 
@@ -121,6 +140,18 @@ function DisplayNotes(props) {
     services.addToCart(id).then((data) => {
       console.log(data);
       props.allCartItem();
+    })
+      .catch((err) => {
+        console.log(err);
+
+      });
+  };
+  const addedToWishlist = (e, data) => {
+    e.stopPropagation();
+    const id = data._id;
+    data.isWishlist = true;
+    services.addToWishlist(id).then((data) => {
+      console.log(data);
     })
       .catch((err) => {
         console.log(err);
@@ -155,19 +186,20 @@ function DisplayNotes(props) {
               <option value={0}>Sort by relevance</option>
               <option value={1}>Price: Low to High</option>
               <option value={2}>Price: High to Low </option>
-              <option value={3}>Newest Arrival</option>
             </Select>
           </FormControl>
         </div>
       </span>
       <div className="allBooks">
-        {props.Books.books.map((data) => (
+        {/*   {props.Books.books.map((data) => ( */}
+        {currentBooks.map((data) => (
           <div className="bookContainer">
             {props.cartBooks.map((cart) => {
               if (cart.product_id._id === data._id) {
                 data.isCart = true;
               }
             })}
+           
             <div className="imageContainer">
               <img className="bookImage" src={bookImg} alt="" />
             </div>
@@ -190,6 +222,19 @@ function DisplayNotes(props) {
               <Button variant="contained" className={classes.addedBagButton}>
                 Added To Bag
               </Button>
+            ) : data.isWishlist ? (
+              <div className="buttonContainer">
+                <Button
+                  variant="contained"
+                  onClick={(e) => addedToBag(e, data)}
+                  className={classes.addToBagButton}
+                >
+                  Add To Bag
+                  </Button>
+                <Button variant="contained" className={classes.wishListedButton} >
+                  Wishlisted
+             </Button>
+              </div>
             ) : (
               <div className="buttonContainer">
                 <Button
@@ -199,7 +244,9 @@ function DisplayNotes(props) {
                 >
                   Add To Bag
                   </Button>
-                <Button variant="outlined" className={classes.wishListButton}>
+
+                <Button variant="outlined" className={classes.wishListButton}
+                  onClick={(e) => addedToWishlist(e, data)}>
                   WishList
                   </Button>
               </div>

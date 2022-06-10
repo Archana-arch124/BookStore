@@ -23,6 +23,14 @@ export default class productServices {
         },
       });
   }; 
+  updateCartBook =(data, id) =>{
+    const user = localStorage.getItem("bookStoreToken")
+    return axios.Put(`${baseUrl}​/cart_item_quantity​/${id}`,data, {
+        headers: {
+          "x-access-token": `${user}`,
+        },
+      });
+  }
   deleteCartItem = (id) => {
     const user = localStorage.getItem("bookStoreToken")
     return axios.Delete(`${baseUrl}/remove_cart_item/${id}`,{
@@ -40,4 +48,30 @@ export default class productServices {
         },
       });
   };
+
+  addToWishlist =(id)=>{
+    const user = localStorage.getItem("bookStoreToken")
+     return axios.Post(`${baseUrl}/add_wish_list/${id}`,null,{
+        headers:{
+          "x-access-token": `${user}`,
+        }
+    });
+}
+getWishlistItem = () => {
+  const user = localStorage.getItem("bookStoreToken")
+  return axios.Get(`${baseUrl}/get_wishlist_items`, {
+      headers: {
+        "x-access-token": `${user}`,
+      },
+    });
+};
+deleteWishlistItem = (id) => {
+  console.log(id)
+  const user = localStorage.getItem("bookStoreToken")
+  return axios.Delete(`${baseUrl}/remove_wishlist_item/${id}`,{
+      headers: {
+        "x-access-token": `${user}`,
+      },
+    });
+}
 }

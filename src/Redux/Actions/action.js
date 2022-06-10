@@ -11,7 +11,7 @@ export const getBooks = () => {
 };
 
 export const books = (data) => {
-    console.log(data)
+    //console.log(data)
     return {
         type: "GET_BOOKS",
         payload: data

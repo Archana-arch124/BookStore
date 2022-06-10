@@ -46,7 +46,11 @@ export default function Profile(props) {
     let history = useHistory();
 
     function handleClick() {
+        localStorage.clear();
         history.push("/Login");
+    }
+    function clickWishlist() {
+        history.push("/dashboard/wishlist");
     }
     const profileHandleOpen = (event) => {
         setAnchorE2(event.currentTarget);
@@ -78,7 +82,7 @@ export default function Profile(props) {
                         <div>Your Orders</div>
                         </MenuItem>
                         <MenuItem  >
-                        <div>Wishlist</div>
+                        <div onClick={clickWishlist}>Wishlist</div>
                         </MenuItem>
                         <MenuItem className={classes.profileIcon}  >
                         <div className={classes.logout} onClick={handleClick}>LOGOUT</div>
